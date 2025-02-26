@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clubs & Organizations - UniConnect</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f9;
+      color: #333;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      background-color: #2c3e50;
+      color: white;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    header .logo {
+      font-size: 24px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+    }
+    header .logo i {
+      margin-right: 10px;
+    }
+    header nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      padding: 0;
+      margin: 0;
+    }
+    header nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    header nav ul li a:hover {
+      color: #3498db;
+    }
+    .search-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .search-bar input {
+      padding: 8px 12px;
+      border: none;
+      border-radius: 5px;
+      font-size: 14px;
+      outline: none;
+    }
+    .search-bar button {
+      padding: 8px 12px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .search-bar button:hover {
+      background-color: #2980b9;
+    }
+    .container {
+      padding: 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .section {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .club-list {
+      list-style: none;
+      padding: 0;
+    }
+    .club-item {
+      background: #fff;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .club-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+    .club-item button {
+      padding: 10px 15px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .club-item button:hover {
+      background-color: #2980b9;
+    }
+    .admin-panel {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .admin-panel .input-group {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-top: 10px;
+    }
+    .admin-panel input {
+      flex: 1;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    .admin-panel button {
+      padding: 12px 15px;
+      border: none;
+      background-color: #2ecc71;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+      font-size: 16px;
+    }
+    .admin-panel button:hover {
+      background-color: #27ae60;
+    }
+    .student-details {
+      margin-top: 20px;
+    }
+    .student-details table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+    }
+    .student-details th, .student-details td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: left;
+    }
+    .student-details th {
+      background-color: #2c3e50;
+      color: white;
+    }
+    footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      background-color: #2c3e50;
+      color: white;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .footer-section {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+      min-width: 200px;
+    }
+    .footer-links {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    footer a {
+      color: white;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    footer a:hover {
+      color: #3498db;
+    }
+    .icon {
+      margin-right: 8px;
+    }
+  </style>
+  <script>
+    let studentDetails = [];
+    
+    function addClub() {
+      const clubName = document.getElementById('club-name').value;
+      if (clubName.trim() === "") {
+        alert("Please enter a valid club name.");
+        return;
+      }
+      const clubList = document.getElementById('club-list');
+      const newClubItem = document.createElement('li');
+      newClubItem.className = 'club-item';
+      newClubItem.innerHTML = `<i class="fas fa-users icon"></i>${clubName} <button onclick="joinClub('${clubName}')">Join</button>`;
+      clubList.appendChild(newClubItem);
+      document.getElementById('club-name').value = "";
+    }
+
+    function joinClub(clubName) {
+      const studentName = prompt("Enter your name:");
+      if (!studentName) return;
+      const studentId = prompt("Enter your ID number:");
+      if (!studentId) return;
+      studentDetails.push({ name: studentName, id: studentId, club: clubName });
+      updateStudentDetails();
+      alert(`Thank you, ${studentName} (ID: ${studentId}), for joining ${clubName}!`);
+    }
+
+    function updateStudentDetails() {
+      const detailsTable = document.getElementById('student-details-body');
+      detailsTable.innerHTML = "";
+      studentDetails.forEach(student => {
+        const row = `<tr><td>${student.name}</td><td>${student.id}</td><td>${student.club}</td></tr>`;
+        detailsTable.innerHTML += row;
+      });
+    }
+
+    function searchClubs() {
+      const searchTerm = document.getElementById('search-input').value.toLowerCase();
+      const clubItems = document.querySelectorAll('.club-item');
+      clubItems.forEach(item => {
+        const clubName = item.textContent.toLowerCase();
+        if (clubName.includes(searchTerm)) {
+          item.style.display = 'flex';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <i class="fas fa-university"></i>UniConnect
+    </div>
+    <nav>
+      <ul>
+        <li><a href="home.html"><i class="fas fa-home icon"></i>Home</a></li>
+        <li><a href="discussions.html"><i class="fas fa-comments icon"></i>Discussions</a></li>
+        <li><a href="calender.html"><i class="fas fa-calendar-alt icon"></i>Schedules</a></li>
+        <li><a href="clubs.html"><i class="fas fa-users icon"></i>Clubs</a></li>
+        <li><a href="career.html"><i class="fas fa-briefcase icon"></i>Career Hub</a></li>
+        <li><a href="alumni.html"><i class="fas fa-network-wired icon"></i>Alumni Network</a></li>
+      </ul>
+    </nav>
+    <div class="search-bar">
+      <input type="text" id="search-input" placeholder="Search clubs...">
+      <button onclick="searchClubs()"><i class="fas fa-search"></i></button>
+    </div>
+  </header>
+
+  <div class="container">
+    <section class="section">
+      <h2><i class="fas fa-users icon"></i>Student Clubs</h2>
+      <ul class="club-list" id="club-list">
+        <li class="club-item"><i class="fas fa-flask icon"></i>Science Club <button onclick="joinClub('Science Club')">Join</button></li>
+        <li class="club-item"><i class="fas fa-music icon"></i>Music Society <button onclick="joinClub('Music Society')">Join</button></li>
+        <li class="club-item"><i class="fas fa-theater-masks icon"></i>Drama Club <button onclick="joinClub('Drama Club')">Join</button></li>
+    <div class="profile-icon"><a href="login.html" title="LOG OUT 😊">👤</div></a>
+
+      </ul>
+    </section>
+
+    <section class="section student-details">
+      <h2><i class="fas fa-user-graduate icon"></i>View Student Details</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>ID</th>
+            <th>Club</th>
+          </tr>
+        </thead>
+        <tbody id="student-details-body"></tbody>
+      </table>
+    </section>
+
+    <section class="section admin-panel">
+      <h2><i class="fas fa-tools icon"></i>Admin Panel</h2>
+      <div class="input-group">
+        <input type="text" id="club-name" placeholder="Enter new club name">
+        <button onclick="addClub()"><i class="fas fa-plus icon"></i>Add Club</button>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="footer-section">
+      <h3>About UniConnect</h3>
+      <p>UniConnect is a platform for students to explore clubs, connect with peers, and manage their university life.</p>
+    </div>
+    <div class="footer-section">
+      <h3>Quick Links</h3>
+      <div class="footer-links">
+        <a href="#"><i class="fas fa-info-circle icon"></i>About Us</a>
+        <a href="#"><i class="fas fa-headset icon"></i>Contact Support</a>
+        <a href="#"><i class="fas fa-shield-alt icon"></i>Privacy Policy</a>
+        <a href="#"><i class="fas fa-file-contract icon"></i>Terms of Use</a>
+      </div>
+    </div>
+    <div class="footer-section">
+      <h3>Follow Us</h3>
+      <div class="footer-links">
+        <a href="#"><i class="fab fa-facebook icon"></i>Facebook</a>
+        <a href="#"><i class="fab fa-twitter icon"></i>Twitter</a>
+        <a href="#"><i class="fab fa-instagram icon"></i>Instagram</a>
+        <a href="#"><i class="fab fa-linkedin icon"></i>LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

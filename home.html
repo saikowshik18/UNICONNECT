@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UniConnect - University Collaboration Platform</title>
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* General Styles */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #f4f4f9, #e0e0f0);
+      color: #333;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      background: linear-gradient(135deg, #2c3e50, #34495e);
+      color: white;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    header .logo {
+      font-size: 28px;
+      font-weight: bold;
+      color: #3498db;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    header nav ul {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+    }
+
+    header nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    header nav ul li a:hover {
+      color: #3498db;
+    }
+
+    header .search-bar input {
+      padding: 8px 12px;
+      border-radius: 25px;
+      border: none;
+      outline: none;
+      width: 200px;
+      transition: width 0.3s ease;
+    }
+
+    header .search-bar input:focus {
+      width: 250px;
+    }
+
+    header .profile-icon {
+      font-size: 28px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    header .profile-icon:hover {
+      transform: scale(1.1);
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 80px 20px;
+      background: linear-gradient(135deg, #3498db, #2980b9);
+      color: white;
+    }
+
+    .hero h1 {
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+
+    .hero .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .hero .cta-buttons button {
+      padding: 12px 25px;
+      border: none;
+      border-radius: 25px;
+      background: #2c3e50;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .hero .cta-buttons button:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Widgets Section */
+    .widgets {
+      display: flex;
+      justify-content: space-around;
+      padding: 40px 20px;
+      background: white;
+    }
+
+    .widget {
+      text-align: center;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      width: 30%;
+      background: white;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .widget:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .widget i {
+      font-size: 36px;
+      color: #3498db;
+      margin-bottom: 15px;
+    }
+
+    .widget h3 {
+      font-size: 20px;
+      margin-bottom: 15px;
+    }
+
+    .widget ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .widget ul li {
+      margin: 10px 0;
+    }
+
+    .widget button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 25px;
+      background: #3498db;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .widget button:hover {
+      background: #2980b9;
+    }
+
+    /* Main Content Sections */
+    .main-content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      padding: 40px 20px;
+    }
+
+    .main-content .section {
+      text-align: center;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      width: 45%;
+      margin: 10px 0;
+      background: white;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .main-content .section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .main-content .section i {
+      font-size: 36px;
+      color: #3498db;
+      margin-bottom: 15px;
+    }
+
+    .main-content .section h2 {
+      font-size: 24px;
+      margin-bottom: 15px;
+    }
+
+    .main-content .section p {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    .main-content .section button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 25px;
+      background: #3498db;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .main-content .section button:hover {
+      background: #2980b9;
+    }
+
+    /* Live Sessions Section */
+    .live-sessions {
+      text-align: center;
+      padding: 40px 20px;
+      background: #ecf0f1;
+    }
+
+    .live-sessions h2 {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    .live-sessions .session-list {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .live-sessions .session {
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      background: white;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .live-sessions .session:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .live-sessions .session h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .live-sessions .session p {
+      font-size: 16px;
+      margin-bottom: 15px;
+    }
+
+    .live-sessions button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 25px;
+      background: #3498db;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .live-sessions button:hover {
+      background: #2980b9;
+    }
+
+    /* Footer Section */
+    footer {
+      display: flex;
+      justify-content: space-around;
+      padding: 40px 20px;
+      background: linear-gradient(135deg, #2c3e50, #34495e);
+      color: white;
+    }
+
+    footer .quick-links, footer .social-media, footer .newsletter {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    footer a {
+      color: white;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    footer a:hover {
+      color: #3498db;
+    }
+
+    footer .newsletter input {
+      padding: 8px 12px;
+      border-radius: 25px;
+      border: none;
+      outline: none;
+    }
+
+    footer .newsletter button {
+      padding: 8px 15px;
+      margin-top: 10px;
+      background: #3498db;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    footer .newsletter button:hover {
+      background: #2980b9;
+    }
+
+    /* Chatbot */
+    .chatbot {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+    }
+
+    .chatbot-window {
+      display: none;
+      width: 300px;
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .chatbot-window .chat-header {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .chatbot-window .chat-body {
+      height: 200px;
+      overflow-y: auto;
+      border-bottom: 1px solid #ddd;
+      margin-bottom: 10px;
+    }
+
+    .chatbot-window input {
+      width: 100%;
+      padding: 5px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header Section -->
+  <header>
+    <div class="logo">UniConnect</div>
+    <nav>
+      <ul>
+        <li><a href="home.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="discussions.html"><i class="fas fa-comments"></i> Discussions</a></li>
+        <li><a href="calender.html"><i class="fas fa-calendar-alt"></i> Schedules</a></li>
+        <li><a href="clubs.html"><i class="fas fa-users"></i> Clubs</a></li>
+        <li><a href="career.html"><i class="fas fa-briefcase"></i> Career Hub</a></li>
+        <li><a href="alumni.html"><i class="fas fa-graduation-cap"></i> Alumni Network</a></li>
+      </ul>
+    </nav>
+    <div class="search-bar">
+      <input type="text" placeholder="Search...">
+    </div>
+    <div class="profile-icon"><a href="login.html" title="LOG OUT 😊">👤</div></a>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Welcome to UniConnect!</h1>
+    <p>Your hub for academic discussions, collaboration, and career growth.</p>
+    <div class="cta-buttons">
+      <a href="discussions.html"><button><i class="fas fa-comments"></i> Join Discussion</button></a>
+      <a href="clubs.html"><button><i class="fas fa-users"></i> Explore Clubs</button></a>
+      <a href="calender.html"><button><i class="fas fa-calendar-alt"></i> Check Schedules</button></a>
+    </div>
+  </section>
+
+  <!-- Quick Access Widgets -->
+  <section class="widgets">
+    <div class="widget">
+      <i class="fas fa-calendar-check"></i>
+      <h3>Upcoming Events</h3>
+      <ul>
+        <li>Career Fair - Oct 15</li>
+        <li>Exam Prep Workshop - Oct 20</li>
+      </ul>
+      <a href="calender.html"><button>View All</button></a>
+    </div>
+    <div class="widget">
+      <i class="fas fa-clock"></i>
+      <h3>Class Timetable</h3>
+      <p>Next Class: Math 101 at 10:00 AM</p>
+      <a href="time_table.html"><button>View Full Schedule</button></a>
+    </div>
+    <div class="widget">
+      <i class="fas fa-bell"></i>
+      <h3>Notifications</h3>
+      <ul>
+        <li>New announcement from Faculty</li>
+        <li>Reply to your discussion thread</li>
+      </ul>
+      <a href="discussions.html"><button>View All</button></a>
+    </div>
+  </section>
+
+  <!-- Main Content Sections -->
+  <section class="main-content">
+    <div class="section">
+      <i class="fas fa-comments"></i>
+      <h2>Academic Discussions</h2>
+      <p>Join the conversation with peers and faculty.</p>
+      <a href="discussions.html"><button>Start a New Discussion</button></a>
+    </div>
+    <div class="section">
+      <i class="fas fa-users"></i>
+      <h2>Clubs & Organizations</h2>
+      <p>Explore and join student clubs.</p>
+      <a href="clubs.html"><button>View All Clubs</button></a>
+    </div>
+    <div class="section">
+      <i class="fas fa-briefcase"></i>
+      <h2>Career Hub</h2>
+      <p>Discover job and internship opportunities.</p>
+      <a href="career.html"><button>Explore Opportunities</button></a>
+    </div>
+    <div class="section">
+      <i class="fas fa-graduation-cap"></i>
+      <h2>Alumni Network</h2>
+      <p>Connect with alumni for mentorship and guidance.</p>
+      <a href="alumni.html"><button>Join the Network</button></a>
+    </div>
+  </section>
+
+  <!-- Live Collaboration Section -->
+  <section class="live-sessions">
+    <h2>Live Sessions & Collaboration</h2>
+    <div class="session-list">
+      <div class="session">
+        <h3>Ongoing: Q&A with Alumni</h3>
+        <p>Join now to ask questions!</p>
+      </div>
+      <div class="session">
+        <h3>Upcoming: Study Group - Math 101</h3>
+        <p>Starts at 3:00 PM</p>
+      </div>
+    </div>
+    <button>Host a Live Session</button>
+  </section>
+
+  <!-- Footer Section -->
+  <footer>
+    <div class="quick-links">
+      <a href="#"><i class="fas fa-info-circle"></i> About Us</a>
+      <a href="#"><i class="fas fa-headset"></i> Contact Support</a>
+      <a href="#"><i class="fas fa-shield-alt"></i> Privacy Policy</a>
+      <a href="#"><i class="fas fa-file-alt"></i> Terms of Use</a>
+    </div>
+    <div class="social-media">
+      <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
+      <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
+      <a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a>
+    </div>
+    <div class="newsletter">
+      <input type="email" placeholder="Enter your email">
+      <button>Subscribe</button>
+    </div>
+  </footer>
+
+  <!-- Chatbot -->
+  <div class="chatbot">
+    <button id="chatbot-button">💬</button>
+    <div class="chatbot-window" id="chatbot-window">
+      <div class="chat-header">UniConnect Chatbot</div>
+      <div class="chat-body" id="chat-body">
+        <p>Hello! How can I help you today?</p>
+      </div>
+      <input type="text" id="chat-input" placeholder="Type your question...">
+    </div>
+  </div>
+
+  <script>
+    // Chatbot Toggle
+    document.getElementById('chatbot-button').addEventListener('click', function () {
+      const chatbotWindow = document.getElementById('chatbot-window');
+      chatbotWindow.style.display = chatbotWindow.style.display === 'block' ? 'none' : 'block';
+    });
+
+    // Chatbot Interaction
+    document.getElementById('chat-input').addEventListener('keypress', function (e) {
+      if (e.key === 'Enter') {
+        const input = this.value;
+        const chatBody = document.getElementById('chat-body');
+        chatBody.innerHTML += `<p><strong>You:</strong> ${input}</p>`;
+        this.value = '';
+        // Simulate a response
+        setTimeout(() => {
+          chatBody.innerHTML += `<p><strong>Bot:</strong> I'll help you with that! 5 discussions are available</p>`;
+          chatBody.scrollTop = chatBody.scrollHeight;
+        }, 1000);
+      }
+    });
+  </script>
+</body>
+</html>

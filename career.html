@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UniConnect - University Collaboration Platform</title>
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* General Styles */
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f9;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      background: linear-gradient(135deg, #2c3e50, #34495e);
+      color: white;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    header .logo {
+      font-size: 24px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    header .logo i {
+      font-size: 28px;
+    }
+
+    header nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    header nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    header nav ul li a:hover {
+      color: #3498db;
+    }
+
+    header .search-bar input {
+      padding: 8px 12px;
+      border-radius: 20px;
+      border: none;
+      outline: none;
+      font-size: 14px;
+    }
+
+    header .profile-icon {
+      font-size: 24px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    header .profile-icon:hover {
+      transform: scale(1.1);
+    }
+
+    .hero {
+      text-align: center;
+      padding: 80px 20px;
+      background: linear-gradient(135deg, #3498db, #2980b9);
+      color: white;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+
+    .hero .cta-buttons button {
+      margin: 10px;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 25px;
+      background: linear-gradient(135deg, #2c3e50, #34495e);
+      color: white;
+      cursor: pointer;
+      font-size: 16px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .hero .cta-buttons button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .widgets {
+      display: flex;
+      justify-content: space-around;
+      padding: 40px 20px;
+      background-color: white;
+      gap: 20px;
+    }
+
+    .widget {
+      text-align: center;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 15px;
+      width: 30%;
+      background: white;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .widget:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .widget h3 {
+      font-size: 20px;
+      margin-bottom: 15px;
+      color: #2c3e50;
+    }
+
+    .widget ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .widget ul li {
+      margin-bottom: 10px;
+      color: #666;
+    }
+
+    .widget button {
+      padding: 10px 20px;
+      background: linear-gradient(135deg, #3498db, #2980b9);
+      color: white;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .widget button:hover {
+      background: linear-gradient(135deg, #2980b9, #3498db);
+    }
+
+    .main-content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      padding: 40px 20px;
+      gap: 20px;
+    }
+
+    .main-content .section {
+      text-align: center;
+      padding: 30px;
+      border: 1px solid #ddd;
+      border-radius: 15px;
+      width: 45%;
+      background: white;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .main-content .section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .main-content .section h2 {
+      font-size: 24px;
+      margin-bottom: 15px;
+      color: #2c3e50;
+    }
+
+    .main-content .section p {
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    .main-content .section button {
+      padding: 10px 20px;
+      background: linear-gradient(135deg, #3498db, #2980b9);
+      color: white;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .main-content .section button:hover {
+      background: linear-gradient(135deg, #2980b9, #3498db);
+    }
+
+    .live-sessions {
+      text-align: center;
+      padding: 40px 20px;
+      background: #ecf0f1;
+    }
+
+    .live-sessions h2 {
+      font-size: 28px;
+      margin-bottom: 20px;
+      color: #2c3e50;
+    }
+
+    .session-list {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .session {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      width: 45%;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .session:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .session h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+      color: #2c3e50;
+    }
+
+    .session p {
+      color: #666;
+    }
+
+    .live-sessions button {
+      padding: 12px 24px;
+      background: linear-gradient(135deg, #3498db, #2980b9);
+      color: white;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 20px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .live-sessions button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-around;
+      padding: 40px 20px;
+      background: linear-gradient(135deg, #2c3e50, #34495e);
+      color: white;
+    }
+
+    footer .quick-links,
+    footer .social-media,
+    footer .newsletter {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    footer a {
+      color: white;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    footer a:hover {
+      color: #3498db;
+    }
+
+    footer .newsletter input {
+      padding: 8px 12px;
+      border-radius: 20px;
+      border: none;
+      outline: none;
+      font-size: 14px;
+    }
+
+    footer .newsletter button {
+      padding: 8px 12px;
+      background: linear-gradient(135deg, #3498db, #2980b9);
+      color: white;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    footer .newsletter button:hover {
+      background: linear-gradient(135deg, #2980b9, #3498db);
+    }
+
+    .chatbot {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+    }
+
+    .chatbot-window {
+      display: none;
+      width: 300px;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+    }
+
+    .chatbot-window .chat-header {
+      padding: 15px;
+      background: linear-gradient(135deg, #3498db, #2980b9);
+      color: white;
+      font-weight: bold;
+    }
+
+    .chatbot-window .chat-body {
+      height: 200px;
+      padding: 15px;
+      overflow-y: auto;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .chatbot-window input {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      outline: none;
+      font-size: 14px;
+    }
+
+    /* Career Hub Styles */
+    .career-hub {
+      background-color: #f9f9f9;
+      padding: 20px;
+      border-radius: 15px;
+    }
+
+    .job-filters {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .job-filters input,
+    .job-filters select {
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 20px;
+      flex: 1;
+      font-size: 14px;
+      outline: none;
+    }
+
+    .job-filters button {
+      padding: 10px 20px;
+      background: linear-gradient(135deg, #3498db, #2980b9);
+      color: white;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .job-filters button:hover {
+      background: linear-gradient(135deg, #2980b9, #3498db);
+    }
+
+    .job-listings {
+      max-height: 300px;
+      overflow-y: auto;
+      margin-bottom: 20px;
+    }
+
+    .job-listing {
+      background: white;
+      padding: 15px;
+      border-radius: 15px;
+      margin-bottom: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .job-listing:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .job-listing h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+      color: #2c3e50;
+    }
+
+    .job-listing p {
+      color: #666;
+      margin-bottom: 10px;
+    }
+
+    .job-listing button {
+      padding: 8px 15px;
+      background: linear-gradient(135deg, #27ae60, #219653);
+      color: white;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .job-listing button:hover {
+      background: linear-gradient(135deg, #219653, #27ae60);
+    }
+
+    .job-listing i {
+      margin-right: 8px;
+    }
+
+    /* Networking Button */
+    .career-hub button {
+      width: 100%;
+      padding: 10px 20px;
+      background: linear-gradient(135deg, #e67e22, #d35400);
+      color: white;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .career-hub button:hover {
+      background: linear-gradient(135deg, #d35400, #e67e22);
+    }
+  </style>
+</head>
+<body>
+  <!-- Header Section -->
+  <header>
+    <div class="logo">
+      <i class="fas fa-university"></i> UniConnect
+    </div>
+    <nav>
+      <ul>
+        <li><a href="home.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="discussions.html"><i class="fas fa-comments"></i> Discussions</a></li>
+        <li><a href="calender.html"><i class="fas fa-calendar-alt"></i> Schedules</a></li>
+        <li><a href="clubs.html"><i class="fas fa-users"></i> Clubs</a></li>
+        <li><a href="career.html"><i class="fas fa-briefcase"></i> Career Hub</a></li>
+        <li><a href="alumni.html"><i class="fas fa-network-wired"></i> Alumni Network</a></li>
+    <div class="profile-icon"><a href="login.html" title="LOG OUT 😊">👤</div></a>
+
+      </ul>
+    </nav>
+    <div class="search-bar">
+      <input type="text" placeholder="Search...">
+    </div>
+    <div class="profile-icon">👤</div>
+  </header>
+
+
+
+ 
+
+
+  <section class="main-content">
+    <div class="section">
+      <h2><i class="fas fa-comments"></i> Academic Discussions</h2>
+      <p>Join the conversation with peers and faculty.</p>
+      <button><i class="fas fa-plus"></i> Start a New Discussion</button>
+    </div>
+    <div class="section">
+      <h2><i class="fas fa-users"></i> Clubs & Organizations</h2>
+      <p>Explore and join student clubs.</p>
+      <button><i class="fas fa-search"></i> View All Clubs</button>
+    </div>
+    <!-- Career Hub Section -->
+    <div class="section career-hub">
+      <h2><i class="fas fa-briefcase"></i> Career Hub</h2>
+      <p>Explore career and internship opportunities.</p>
+      <div class="job-filters">
+        <input type="text" id="job-search" placeholder="Search jobs...">
+        <select id="job-category">
+          <option value="">All Categories</option>
+          <option value="Internship">Internship</option>
+          <option value="Full-Time">Full-Time</option>
+          <option value="Part-Time">Part-Time</option>
+          <option value="Remote">Remote</option>
+        </select>
+        <button onclick="filterJobs()"><i class="fas fa-search"></i> Search</button>
+      </div>
+      <div class="job-listings" id="job-listings">
+        <!-- Job listings will be dynamically added here -->
+      </div>
+      <button onclick="openNetworking()"><i class="fas fa-users"></i> Networking Opportunities</button>
+    </div>
+    <div class="section">
+      <h2><i class="fas fa-network-wired"></i> Alumni Network</h2>
+      <p>Connect with alumni for mentorship and guidance.</p>
+      <button><i class="fas fa-link"></i> Join the Network</button>
+    </div>
+  </section>
+
+  <!-- Live Collaboration Section -->
+  <section class="live-sessions">
+    <h2><i class="fas fa-video"></i> Live Sessions & Collaboration</h2>
+    <div class="session-list">
+      <div class="session">
+        <h3>Ongoing: Q&A with Alumni</h3>
+        <p>Join now to ask questions!</p>
+      </div>
+      <div class="session">
+        <h3>Upcoming: Study Group - Math 101</h3>
+        <p>Starts at 3:00 PM</p>
+      </div>
+    </div>
+    <button><i class="fas fa-video"></i> Host a Live Session</button>
+  </section>
+
+  <!-- Footer Section -->
+  <footer>
+    <div class="quick-links">
+      <a href="#"><i class="fas fa-info-circle"></i> About Us</a>
+      <a href="#"><i class="fas fa-headset"></i> Contact Support</a>
+      <a href="#"><i class="fas fa-shield-alt"></i> Privacy Policy</a>
+      <a href="#"><i class="fas fa-file-alt"></i> Terms of Use</a>
+    </div>
+    <div class="social-media">
+      <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
+      <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
+      <a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a>
+    </div>
+    <div class="newsletter">
+      <input type="email" placeholder="Enter your email">
+      <button><i class="fas fa-paper-plane"></i> Subscribe</button>
+    </div>
+  </footer>
+
+  <!-- Chatbot -->
+  <div class="chatbot">
+    <button id="chatbot-button"><i class="fas fa-comment-dots"></i></button>
+    <div class="chatbot-window" id="chatbot-window">
+      <div class="chat-header">UniConnect Chatbot</div>
+      <div class="chat-body" id="chat-body">
+        <p>Hello! How can I help you today?</p>
+      </div>
+      <input type="text" id="chat-input" placeholder="Type your question...">
+    </div>
+  </div>
+
+  <script>
+    // Sample Job Data
+    let jobs = [
+      {
+        title: "Software Engineering Intern",
+        company: "Tech Corp",
+        type: "Internship",
+        location: "Remote",
+        description: "Join our team as a software engineering intern and work on cutting-edge projects.",
+      },
+      {
+        title: "Marketing Associate",
+        company: "Global Marketing",
+        type: "Full-Time",
+        location: "New York, NY",
+        description: "We are looking for a creative marketing associate to join our team.",
+      },
+      {
+        title: "Data Analyst",
+        company: "Data Insights",
+        type: "Part-Time",
+        location: "San Francisco, CA",
+        description: "Analyze data and provide insights to drive business decisions.",
+      },
+    ];
+
+    // Function to display job listings
+    function displayJobs(filteredJobs = jobs) {
+      const jobListings = document.getElementById("job-listings");
+      jobListings.innerHTML = ""; // Clear previous listings
+      filteredJobs.forEach((job) => {
+        const jobListing = document.createElement("div");
+        jobListing.className = "job-listing";
+        jobListing.innerHTML = `
+          <h3><i class="fas fa-laptop-code"></i> ${job.title}</h3>
+          <p><strong><i class="fas fa-building"></i> Company:</strong> ${job.company}</p>
+          <p><strong><i class="fas fa-clock"></i> Type:</strong> ${job.type}</p>
+          <p><strong><i class="fas fa-map-marker-alt"></i> Location:</strong> ${job.location}</p>
+          <p>${job.description}</p>
+          <button onclick="applyForJob('${job.title}')"><i class="fas fa-paper-plane"></i> Apply Now</button>
+        `;
+        jobListings.appendChild(jobListing);
+      });
+    }
+
+    // Function to filter jobs
+    function filterJobs() {
+      const searchTerm = document.getElementById("job-search").value.toLowerCase();
+      const category = document.getElementById("job-category").value;
+      const filteredJobs = jobs.filter((job) => {
+        const matchesSearch = job.title.toLowerCase().includes(searchTerm) ||
+                              job.company.toLowerCase().includes(searchTerm);
+        const matchesCategory = category ? job.type === category : true;
+        return matchesSearch && matchesCategory;
+      });
+      displayJobs(filteredJobs);
+    }
+
+    // Function to apply for a job
+    function applyForJob(jobTitle) {
+      alert("You have applied for: ${jobTitle}");
+    }
+
+    // Function to open networking opportunities
+    function openNetworking() {
+      alert("Networking feature coming soon!");
+    }
+
+    // Display jobs on page load
+    displayJobs();
+
+    // Chatbot Toggle
+    document.getElementById('chatbot-button').addEventListener('click', function () {
+      const chatbotWindow = document.getElementById('chatbot-window');
+      chatbotWindow.style.display = chatbotWindow.style.display === 'block' ? 'none' : 'block';
+    });
+
+    // Chatbot Interaction
+    document.getElementById('chat-input').addEventListener('keypress', function (e) {
+      if (e.key === 'Enter') {
+        const input = this.value;
+        const chatBody = document.getElementById('chat-body');
+        chatBody.innerHTML += <p><strong>You:</strong> ${input}</p>;
+        this.value = '';
+        // Simulate a response
+        setTimeout(() => {
+          chatBody.innerHTML += <p><strong>Bot:</strong> I'll help you with that!</p>;
+          chatBody.scrollTop = chatBody.scrollHeight;
+        }, 1000);
+      }
+    });
+  </script>
+</body>
+</html>
